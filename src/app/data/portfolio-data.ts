@@ -49,7 +49,7 @@ export const navLinks: NavLink[] = [
   { label: 'Work', href: '#work' },
   {
     label: 'Resume',
-    href: '/assets/sai-charan-abbireddy-resume.pdf',
+    href: 'assets/sai-charan-abbireddy-resume.pdf',
     external: true,
     highlighted: true,
   },

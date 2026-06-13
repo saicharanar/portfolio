@@ -13,7 +13,7 @@
 }
 
 .world-image {
-  background: url('/assets/ringworld-hero.png') center top / cover no-repeat;
+  background: var(--world-image) center top / cover no-repeat;
   filter: none;
   opacity: 1;
   transform: scale(1.01);

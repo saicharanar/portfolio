@@ -1,0 +1,77 @@
+.skills {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  gap: clamp(2.4rem, 4.8vw, 4.8rem);
+  align-content: center;
+  padding: clamp(6rem, 10vw, 10rem) 0;
+}
+
+.skills-heading {
+  display: grid;
+  max-width: 720px;
+  gap: 1.25rem;
+}
+
+.skills-heading h2 {
+  font-size: clamp(3rem, 4.25vw, 4.55rem);
+}
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+  max-width: 1120px;
+}
+
+article {
+  position: relative;
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(224, 178, 79, 0.32);
+}
+
+article::before {
+  position: absolute;
+  top: -0.17rem;
+  left: 0;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 999px;
+  background: rgba(224, 178, 79, 0.9);
+  box-shadow: 0 0 1.4rem rgba(224, 178, 79, 0.3);
+  content: '';
+}
+
+article p {
+  color: rgba(224, 178, 79, 0.9);
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 0.86vw, 0.82rem);
+  font-weight: 800;
+  letter-spacing: 0.19em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+h3 {
+  color: rgba(248, 240, 224, 0.84);
+  font-family: var(--font-sans);
+  font-size: clamp(0.98rem, 1.08vw, 1.08rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .skill-groups {
+    grid-template-columns: 1fr;
+    max-width: 38rem;
+  }
+
+  article {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}

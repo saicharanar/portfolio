@@ -1,16 +1,35 @@
-import { Component } from '@angular/core';
-import { Navbar } from './components/navbar/navbar';
-import { Hero } from './components/hero/hero';
-import { Experience } from './components/experience/experience';
-import { Arsenal } from './components/arsenal/arsenal';
-import { Footer } from './components/footer/footer';
+import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
+import { AboutSectionComponent } from './components/about-section/about-section';
+import { BackgroundComponent } from './components/background/background';
+import { ContactSectionComponent } from './components/contact-section/contact-section';
+import { ExperienceSectionComponent } from './components/experience-section/experience-section';
+import { HeroSectionComponent } from './components/hero-section/hero-section';
+import { NavbarComponent } from './components/navbar/navbar';
+import { SkillsSectionComponent } from './components/skills-section/skills-section';
+import { WorkSectionComponent } from './components/work-section/work-section';
+import { PortfolioAnimationService } from './services/portfolio-animation.service';
 
 @Component({
   selector: 'app-root',
-  imports: [Navbar, Hero, Experience, Arsenal, Footer],
+  standalone: true,
+  imports: [
+    BackgroundComponent,
+    NavbarComponent,
+    HeroSectionComponent,
+    AboutSectionComponent,
+    ExperienceSectionComponent,
+    WorkSectionComponent,
+    SkillsSectionComponent,
+    ContactSectionComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  title = 'Sai Charan Abbireddy Portfolio';
+export class App implements AfterViewInit {
+  private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly animations = inject(PortfolioAnimationService);
+
+  ngAfterViewInit(): void {
+    this.animations.init(this.host.nativeElement);
+  }
 }

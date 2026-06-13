@@ -1,0 +1,86 @@
+.closing {
+  position: relative;
+  display: grid;
+  min-height: 82vh;
+  align-content: center;
+  justify-items: center;
+  gap: 1.35rem;
+  padding: clamp(6rem, 10vw, 10rem) 0;
+  text-align: center;
+}
+
+h2 {
+  max-width: 760px;
+  font-size: clamp(3.3rem, 5vw, 5.2rem);
+}
+
+.closing-copy {
+  max-width: 670px;
+  color: rgba(248, 240, 224, 0.72);
+  font-family: var(--font-sans);
+  font-size: clamp(0.98rem, 1.18vw, 1.12rem);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.45rem;
+  margin-top: 0.7rem;
+}
+
+.closing-links {
+  display: flex;
+  gap: clamp(1.4rem, 2.6vw, 2.4rem);
+  margin-top: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.closing-links a {
+  color: rgba(248, 240, 224, 0.72);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.closing-links a:hover,
+.closing-links a:focus-visible {
+  color: var(--color-gold);
+}
+
+.site-footer {
+  position: absolute;
+  right: 0;
+  bottom: clamp(1.35rem, 3vw, 2.6rem);
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  color: rgba(248, 240, 224, 0.5);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .closing-actions {
+    width: min(22rem, 100%);
+    margin-inline: auto;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .site-footer {
+    position: static;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-top: 2rem;
+  }
+}

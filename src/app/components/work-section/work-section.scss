@@ -1,0 +1,116 @@
+.case-study {
+  position: relative;
+  min-height: 74vh;
+  display: grid;
+  align-items: center;
+  padding: clamp(3rem, 5.5vw, 5.5rem) 0;
+  overflow: hidden;
+}
+
+.case-study::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4, 13, 16, 0), rgba(4, 13, 16, 0.16) 48%, rgba(4, 13, 16, 0)),
+    radial-gradient(circle at 78% 50%, rgba(224, 178, 79, 0.06), transparent 26rem);
+  content: '';
+  pointer-events: none;
+}
+
+.case-study-alt::before {
+  background:
+    linear-gradient(180deg, rgba(4, 13, 16, 0), rgba(12, 38, 43, 0.18) 48%, rgba(4, 13, 16, 0)),
+    radial-gradient(circle at 24% 48%, rgba(121, 158, 151, 0.08), transparent 25rem);
+}
+
+.case-shell {
+  display: grid;
+  grid-template-columns: 3.6rem minmax(0, 1fr);
+  grid-template-areas:
+    'number heading'
+    'number body';
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: start;
+  padding: clamp(1.7rem, 3.6vw, 3.25rem) 0;
+}
+
+.case-number {
+  grid-area: number;
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  line-height: 1;
+}
+
+.case-heading {
+  grid-area: heading;
+  display: grid;
+  max-width: 990px;
+  gap: 0.85rem;
+}
+
+h3 {
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5.1vw, 5.25rem);
+  font-weight: 400;
+  line-height: 0.98;
+  text-wrap: balance;
+  text-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.28);
+}
+
+.case-meta,
+.case-label {
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.case-body {
+  grid-area: body;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.3rem, 3.2vw, 3.2rem);
+  max-width: 1010px;
+  padding-top: clamp(0.75rem, 1.5vw, 1.35rem);
+}
+
+.case-body div {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+}
+
+.case-body p:not(.case-label) {
+  max-width: 18.5rem;
+  color: rgba(248, 240, 224, 0.75);
+  font-family: var(--font-sans);
+  font-size: clamp(0.96rem, 1.05vw, 1.06rem);
+  font-weight: 300;
+  line-height: 1.58;
+}
+
+.case-body span {
+  color: var(--color-cream);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .case-shell,
+  .case-body {
+    grid-template-columns: 1fr;
+  }
+
+  .case-shell {
+    grid-template-areas:
+      'number'
+      'heading'
+      'body';
+  }
+}

@@ -1,0 +1,37 @@
+.world {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #061316;
+  pointer-events: none;
+}
+
+.world span {
+  position: absolute;
+  inset: 0;
+}
+
+.world-image {
+  background: url('/assets/ringworld-hero.png') center top / cover no-repeat;
+  filter: none;
+  opacity: 1;
+  transform: scale(1.01);
+}
+
+.world-depth {
+  background:
+    radial-gradient(
+      circle at 52% 42%,
+      rgba(6, 19, 22, 0),
+      rgba(6, 19, 22, 0.05) 42%,
+      rgba(4, 11, 13, 0.42) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2, 9, 11, 0.06) 0%,
+      rgba(2, 9, 11, 0.1) 55%,
+      rgba(2, 9, 11, 0.31) 100%
+    ),
+    linear-gradient(90deg, rgba(2, 8, 10, 0.08), rgba(2, 8, 10, 0.01) 48%, rgba(2, 8, 10, 0.16));
+}

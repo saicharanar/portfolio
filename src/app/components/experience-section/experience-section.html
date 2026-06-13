@@ -1,0 +1,21 @@
+<section class="experience section-shell" id="experience" aria-labelledby="experience-title">
+  <div class="experience-heading">
+    <p class="section-kicker">Experience</p>
+    <h2 class="display-title" id="experience-title">The path so far.</h2>
+    <p class="body-copy">Three roles, one through-line: frontend systems for real workflows.</p>
+  </div>
+
+  <div class="experience-flow">
+    @for (item of experiences; track item.index) {
+      <article>
+        <p class="experience-index">{{ item.index }}</p>
+        <div>
+          <p class="time">{{ item.date }}</p>
+          <h3>{{ item.role }}</h3>
+          <p class="company">{{ item.company }}</p>
+        </div>
+        <p class="experience-tags">{{ item.tags }}</p>
+      </article>
+    }
+  </div>
+</section>

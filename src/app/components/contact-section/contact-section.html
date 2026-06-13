@@ -1,0 +1,26 @@
+<section class="closing section-shell" id="contact" aria-labelledby="contact-title">
+  <p class="section-kicker">Contact</p>
+  <h2 class="display-title" id="contact-title">Let&rsquo;s build something worth exploring.</h2>
+  <p class="closing-copy">
+    Frontend engineer based in Hyderabad, open to product-focused frontend opportunities where
+    interface quality, accessibility, and thoughtful engineering matter.
+  </p>
+  <div class="closing-actions">
+    <a class="button button-primary" href="mailto:saicharan.abbireddy@gmail.com">Get in Touch</a>
+  </div>
+  <div class="closing-links" aria-label="Profile links">
+    @for (link of contactLinks; track link.label) {
+      <a
+        [href]="link.href"
+        [attr.target]="link.external ? '_blank' : null"
+        [attr.rel]="link.external ? 'noreferrer' : null"
+      >
+        {{ link.label }}
+      </a>
+    }
+  </div>
+  <footer class="site-footer">
+    <p>&copy; 2026 Sai Charan</p>
+    <p>Built with Angular and SCSS.</p>
+  </footer>
+</section>

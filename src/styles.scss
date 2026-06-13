@@ -1,157 +1,162 @@
-/* Core Variables */
 :root {
-  /* Colors */
-  --bg-primary: #0b0f19;
-  --bg-secondary: #0f172a;
-  --bg-tertiary: #1e293b;
-  
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #64748b;
-  
-  --accent-primary: #38bdf8;
-  --accent-glow: rgba(56, 189, 248, 0.2);
-  --accent-success: #10b981;
-  
-  /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  
-  /* Animations */
-  --transition-fast: 0.2s ease-out;
-  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Reset & Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
+  --color-deep: #030b0e;
+  --color-ink: #071417;
+  --color-teal: #0c272c;
+  --color-cream: #f7efe0;
+  --color-muted: #b9c0ba;
+  --color-gold: #e0b24f;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  font-family: var(--font-body);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  margin: 0;
+  background: var(--color-deep);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  color: var(--color-ink);
+  background: var(--color-gold);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 0.35rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.section-shell,
+.case-shell {
   position: relative;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--text-primary);
-}
-
-a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: #7dd3fc;
-}
-
-ul {
-  list-style: none;
-}
-
-/* Layout Utilities */
-.container {
-  max-width: 1200px;
+  width: min(1180px, calc(100% - clamp(2rem, 8vw, 8rem)));
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
-/* Heavy Animations */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+.eyebrow,
+.section-kicker {
+  margin: 0;
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 0.9vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 0.34em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.display-title {
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1;
+  text-wrap: balance;
+  text-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.28);
+}
+
+.body-copy {
+  color: rgba(248, 240, 224, 0.75);
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.18vw, 1.13rem);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.button {
+  display: inline-flex;
+  min-width: 12.4rem;
+  min-height: 3.65rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(248, 240, 224, 0.25);
+  border-radius: 0.25rem;
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.19em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
+}
+
+.button span {
+  margin-left: 0.5rem;
+}
+
+.button-primary {
+  border-color: rgba(231, 180, 80, 0.84);
+  color: #081114;
+  background: linear-gradient(180deg, #f1cd72, #d6a945);
+  box-shadow: 0 1rem 3.5rem rgba(224, 178, 79, 0.14);
+}
+
+.button-secondary {
+  background: rgba(13, 31, 36, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 760px) {
+  .section-shell,
+  .case-shell {
+    width: min(100% - 2rem, 1160px);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .button {
+    width: 100%;
+    min-width: 0;
+    min-height: 3.75rem;
   }
 }
 
-@keyframes glowPulse {
-  0% { box-shadow: 0 0 15px var(--accent-glow); }
-  50% { box-shadow: 0 0 30px var(--accent-glow); }
-  100% { box-shadow: 0 0 15px var(--accent-glow); }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+
+  .button:hover,
+  .button:focus-visible {
+    transform: none !important;
   }
-}
-
-/* Utility Animation Classes */
-.animate-fade-up {
-  opacity: 0;
-  animation: fadeUp var(--transition-slow) forwards;
-  animation-play-state: paused;
-}
-
-.animate-slide-right {
-  opacity: 0;
-  animation: slideInRight var(--transition-slow) forwards;
-  animation-play-state: paused;
-}
-
-/* Staggered Delays */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-
-.section {
-  padding: 6rem 0;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  position: relative;
-  display: inline-block;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background-color: var(--accent-primary);
-  border-radius: 2px;
 }

@@ -1,9 +1,16 @@
-<header class="navbar">
-  <div class="nav-container">
-    <nav class="floating-nav">
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#arsenal" class="nav-link">Arsenal</a>
-      <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link highlight-link">Resume</a>
-    </nav>
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="brand" href="#top" aria-label="Sai Charan home">Sai Charan</a>
+
+  <div class="nav-links">
+    @for (link of navLinks; track link.label) {
+      <a
+        [class.resume-link]="link.highlighted"
+        [href]="link.href"
+        [attr.target]="link.external ? '_blank' : null"
+        [attr.rel]="link.external ? 'noreferrer' : null"
+      >
+        {{ link.label }}
+      </a>
+    }
   </div>
-</header>
+</nav>

@@ -1,0 +1,30 @@
+@for (project of projects; track project.index; let first = $first; let odd = $odd) {
+  <section
+    class="case-study"
+    [class.case-study-alt]="odd"
+    [attr.id]="first ? 'work' : null"
+    [attr.aria-labelledby]="'case-' + project.index"
+  >
+    <div class="case-shell">
+      <p class="case-number">{{ project.index }}</p>
+      <div class="case-heading">
+        @if (project.kicker) {
+          <p class="section-kicker">{{ project.kicker }}</p>
+        }
+        <p class="case-meta">{{ project.meta }}</p>
+        <h3 [id]="'case-' + project.index">{{ project.title }}</h3>
+      </div>
+
+      <div class="case-body">
+        @for (detail of project.details; track detail.label) {
+          <div>
+            <p class="case-label">{{ detail.label }}</p>
+            <p>
+              <span>{{ detail.lead }}</span> {{ detail.copy }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

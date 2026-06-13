@@ -1,0 +1,107 @@
+.experience {
+  min-height: 96vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(6rem, 10vw, 10rem) 0;
+}
+
+.experience-heading {
+  display: grid;
+  max-width: 760px;
+  gap: 1.25rem;
+  margin-bottom: clamp(2.5rem, 4.6vw, 4.4rem);
+}
+
+.experience-heading h2 {
+  font-size: clamp(3.4rem, 5vw, 5rem);
+}
+
+.experience-flow {
+  display: grid;
+  gap: clamp(0.55rem, 1vw, 0.95rem);
+  max-width: 1040px;
+}
+
+article {
+  display: grid;
+  grid-template-columns: minmax(3.25rem, 4.6rem) minmax(0, 1fr) minmax(14rem, 18rem);
+  gap: clamp(1.2rem, 2.5vw, 2.7rem);
+  align-items: center;
+  padding: clamp(1.05rem, 1.85vw, 1.55rem) 0;
+}
+
+article + article {
+  margin-top: clamp(0.15rem, 0.5vw, 0.45rem);
+}
+
+h3 {
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: clamp(1.95rem, 2.65vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.experience-index {
+  color: rgba(224, 178, 79, 0.96);
+  font-family: var(--font-display);
+  font-size: clamp(2.35rem, 4.3vw, 4.65rem);
+  font-weight: 400;
+  line-height: 0.86;
+  text-shadow: 0 0 2.5rem rgba(224, 178, 79, 0.22);
+}
+
+.time,
+.company,
+.experience-tags {
+  font-family: var(--font-sans);
+}
+
+.time {
+  margin-bottom: 0.65rem;
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.company {
+  margin-top: 0.55rem;
+  color: rgba(248, 240, 224, 0.68);
+  font-size: clamp(0.86rem, 1vw, 0.98rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.experience-tags {
+  justify-self: end;
+  max-width: 18rem;
+  color: rgba(224, 178, 79, 0.82);
+  font-size: clamp(0.72rem, 0.88vw, 0.84rem);
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.7;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .experience-flow,
+  article {
+    grid-template-columns: 1fr;
+  }
+
+  article {
+    gap: 0.75rem;
+  }
+
+  .experience-tags {
+    justify-self: start;
+    text-align: left;
+  }
+}

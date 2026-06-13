@@ -1,0 +1,15 @@
+<section class="skills section-shell" aria-labelledby="skills-title">
+  <div class="skills-heading">
+    <p class="section-kicker">Toolkit</p>
+    <h2 class="display-title" id="skills-title">Built for frontend product work.</h2>
+  </div>
+
+  <div class="skill-groups" aria-label="Technical skills">
+    @for (group of skillGroups; track group.title) {
+      <article>
+        <p>{{ group.title }}</p>
+        <h3>{{ group.skills }}</h3>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<section class="opening section-shell" id="about" aria-labelledby="about-title">
+  <div class="opening-proof" aria-label="Portfolio highlights">
+    @for (point of proofPoints; track point.value) {
+      <p>
+        <span>{{ point.value }}</span> {{ point.label }}
+      </p>
+    }
+  </div>
+
+  <div class="opening-copy">
+    <p class="section-kicker">What I Bring</p>
+    <h2 class="display-title" id="about-title">Interfaces for products people rely on.</h2>
+    <p>Angular, React, TypeScript, accessibility, state, design systems.</p>
+  </div>
+</section>

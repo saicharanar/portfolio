@@ -1,0 +1,12 @@
+node_modules/
+dist/
+tmp/
+.DS_Store
+.thumbnail
+*.dc.html
+support.js
+screenshots/
+uploads/
+artifacts/
+reference/
+docs/

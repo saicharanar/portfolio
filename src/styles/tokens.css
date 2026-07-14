@@ -1,0 +1,25 @@
+:root {
+  --ink-on-dark: #f3f0ec;
+  --ink-on-dark-muted: rgba(243, 240, 236, 0.68);
+  --ink-on-light: #202632;
+  --ink-on-light-muted: rgba(32, 38, 50, 0.66);
+  --accent-peach: #efad7e;
+  --accent-signal: #d5a15c;
+  --surface-frost: #c9c7d2;
+  --surface-steel: #afc0cb;
+  --surface-violet: #8b829d;
+  --line-on-dark: rgba(243, 240, 236, 0.2);
+  --line-on-light: rgba(32, 38, 50, 0.2);
+  --font-display: 'Space Grotesk', 'Instrument Sans', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --content-max: 92rem;
+  --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --header-height: 5.5rem;
+  --radius-small: 0.65rem;
+  --radius-medium: 1.2rem;
+  --radius-large: 2rem;
+  --ease-out: cubic-bezier(0.22, 0.78, 0.24, 1);
+  --z-header: 30;
+  --z-dialog: 80;
+}

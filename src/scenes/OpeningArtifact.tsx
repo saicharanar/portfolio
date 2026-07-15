@@ -1,144 +1,53 @@
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
+import { BrandMark } from '../components/BrandMark';
+import { SceneChrome } from '../components/SceneChrome';
 
-type OpeningArtifactProps = {
-  onOpenPalette: () => void;
-};
-
-const interactionStates = [
-  { signal: 'input', detail: 'a choice is made' },
-  { signal: 'state', detail: 'the system remembers' },
-  { signal: 'feedback', detail: 'the interface answers' },
-] as const;
-
-export function OpeningArtifact({ onOpenPalette }: OpeningArtifactProps) {
-  const sequenceRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion() ?? false;
-  const [activeState, setActiveState] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: sequenceRef,
-    offset: ['start start', 'end start'],
-  });
-  const bodyY = useTransform(
-    scrollYProgress,
-    [0, 0.62, 1],
-    reduceMotion ? [0, 0, 0] : [0, 0, -54],
-  );
-  const bodyScale = useTransform(
-    scrollYProgress,
-    [0, 0.62, 1],
-    reduceMotion ? [1, 1, 1] : [1, 1, 0.975],
-  );
-  const bodyOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.68, 1],
-    reduceMotion ? [1, 1, 1] : [1, 1, 0.24],
-  );
-  const lightX = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduceMotion ? [0, 0] : [-120, 220],
-  );
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveState((current) => (current + 1) % interactionStates.length);
-    }, 1900);
-    return () => window.clearInterval(interval);
-  }, []);
-
-  const state = interactionStates[activeState];
-
+export function OpeningArtifact() {
   return (
-    <div
-      ref={sequenceRef}
-      id="top"
-      data-scene="top"
-      className="opening-sequence"
-    >
+    <div id="top" data-scene="top" className="opening-sequence">
       <motion.section
         className="stage opening-stage"
-        initial={false}
         aria-labelledby="opening-title"
       >
-        <motion.span
-          className="opening-stage__light"
-          aria-hidden="true"
-          style={{ x: lightX }}
-        />
+        <SceneChrome index="00" label="Profile / Active" />
 
-        <motion.div
-          className="opening-stage__body"
-          style={{ y: bodyY, scale: bodyScale, opacity: bodyOpacity }}
-        >
-          <motion.p
-            className="stage-index"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.7 }}
-            transition={{ duration: 0.55 }}
+        <div className="opening-stage__body">
+          <motion.div
+            className="opening-artifact"
+            aria-hidden="true"
           >
-            Frontend engineer
-          </motion.p>
-
-          <motion.h1
-            id="opening-title"
-            initial={{ opacity: 0, y: 44 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.55 }}
-            transition={{ duration: 0.72, ease: [0.22, 0.78, 0.24, 1] }}
-          >
-            <span>Sai</span>
-            <span>Charan<em>.</em></span>
-          </motion.h1>
-
-          <motion.p
-            className="opening-stage__statement"
-            initial={{ opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.7 }}
-            transition={{ duration: 0.58, delay: 0.08 }}
-          >
-            Don’t just read the work. Change the state and see what happens next.
-          </motion.p>
-
-          <div className="opening-signal" aria-label="Live interaction trace">
-            <motion.button
-              type="button"
-              onClick={onOpenPalette}
-              aria-label="Open command palette"
-              whileHover={{ y: -4 }}
-              whileTap={{ y: 2, scale: 0.97 }}
+            <motion.div
+              className="opening-artifact__ambient"
+              initial={{ opacity: 0, scale: 0.84, rotate: -2.5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.35, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
-              ⌘K
-            </motion.button>
-            <span className="opening-signal__track" aria-hidden="true">
-              <motion.i
-                animate={{ x: ['0%', '740%', '0%'] }}
-                transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-              />
-            </span>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={state.signal}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.28 }}
-                aria-live="polite"
-              >
-                <span>{state.signal}</span>
-                <strong>{state.detail}</strong>
-              </motion.p>
-            </AnimatePresence>
-          </div>
-        </motion.div>
+              <BrandMark variant="hero" decorative />
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="opening-copy"
+            initial={{ opacity: 0, y: 44 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="opening-copy__role">Frontend Engineer</p>
+            <h1 id="opening-title">
+              <span>Sai Charan<em>.</em></span>
+            </h1>
+            <p className="opening-copy__statement">
+              I solve product problems, build dependable systems, and launch a few ideas of my own.
+            </p>
+            <div className="opening-actions">
+              <a href="#professional">
+                <span>Selected work</span>
+                <span aria-hidden="true">↘</span>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+        <span className="opening-stage__sweep" aria-hidden="true" />
       </motion.section>
     </div>
   );

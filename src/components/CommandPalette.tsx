@@ -30,6 +30,7 @@ const commands: readonly Command[] = [
   { id: 'anchor', label: 'Anchor', context: 'Local-first planner', href: '#anchor' },
   { id: 'relay', label: 'Relay', context: 'macOS menu bar utility', href: '#relay' },
   { id: 'glide', label: 'Glide', context: 'TypeScript recording CLI', href: '#glide' },
+  { id: 'stack', label: 'Technology', context: 'frontend systems and delivery', href: '#stack' },
   { id: 'contact', label: 'Say hello', context: 'contact', href: '#contact' },
   { id: 'email', label: 'Email Sai Charan', context: 'mailto', href: 'mailto:saicharan.abbireddy@gmail.com' },
   { id: 'resume', label: 'Open résumé', context: 'PDF', href: '/resume.pdf', isExternal: true },
@@ -46,6 +47,8 @@ export function CommandPalette({
 }: CommandPaletteProps) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const selectedOptionRef = useRef<HTMLAnchorElement>(null);
+  const shouldRevealSelectionRef = useRef(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -94,8 +97,19 @@ export function CommandPalette({
     };
   }, [isOpen, onClose, triggerRef]);
 
+  useEffect(() => {
+    if (!isOpen || !shouldRevealSelectionRef.current) return;
+
+    selectedOptionRef.current?.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+    });
+    shouldRevealSelectionRef.current = false;
+  }, [filteredCommands, isOpen, selectedIndex]);
+
   const moveSelection = (direction: number) => {
     if (!filteredCommands.length) return;
+    shouldRevealSelectionRef.current = true;
     setSelectedIndex((current) =>
       (current + direction + filteredCommands.length) % filteredCommands.length,
     );
@@ -142,6 +156,9 @@ export function CommandPalette({
             exit={{ y: 20, opacity: 0 }}
             transition={{ duration: 0.38, ease: [0.22, 0.78, 0.24, 1] }}
           >
+            <div className="palette-frame" aria-hidden="true">
+              <span /><span /><span /><span />
+            </div>
             <button className="palette-close" type="button" onClick={onClose}>
               Close <kbd>esc</kbd>
             </button>
@@ -153,6 +170,7 @@ export function CommandPalette({
                 ref={inputRef}
                 value={query}
                 onChange={(event) => {
+                  shouldRevealSelectionRef.current = false;
                   setQuery(event.target.value);
                   setSelectedIndex(0);
                 }}
@@ -191,6 +209,7 @@ export function CommandPalette({
             <div id="command-palette-results" className="palette-results" role="listbox">
               {filteredCommands.map((command, index) => (
                 <a
+                  ref={index === selectedIndex ? selectedOptionRef : undefined}
                   id={`command-${command.id}`}
                   key={command.id}
                   className={index === selectedIndex ? 'is-selected' : undefined}
@@ -199,7 +218,10 @@ export function CommandPalette({
                   rel={command.isExternal ? 'noreferrer' : undefined}
                   role="option"
                   aria-selected={index === selectedIndex}
-                  onMouseEnter={() => setSelectedIndex(index)}
+                  onMouseEnter={() => {
+                    shouldRevealSelectionRef.current = false;
+                    setSelectedIndex(index);
+                  }}
                   onClick={onClose}
                 >
                   <span>{command.label}</span>

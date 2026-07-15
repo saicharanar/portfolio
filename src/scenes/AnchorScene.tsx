@@ -17,57 +17,54 @@ export function AnchorScene() {
       id="anchor"
       data-scene="anchor"
       className="stage project-stage anchor-stage"
-      initial={false}
     >
-      <motion.header
-        className="project-copy anchor-copy"
-        initial={{ opacity: 0, x: 28 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ amount: 0.4 }}
-        transition={{ duration: 0.62 }}
-      >
-        <ProjectIdentity name="Anchor" detail="Local-first planner" />
-        <h2>Your plan stays on your device.</h2>
-        <p className="project-deck">
-          Tasks, routines, goals, and expenses remain useful offline, without an account, a server, or a data hand-off.
-        </p>
-      </motion.header>
+      <div className="project-scene__layout anchor-layout">
+        <motion.header
+          className="project-copy anchor-copy"
+          initial={{ opacity: 0, x: -28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ amount: 0.4 }}
+          transition={{ duration: 0.62 }}
+        >
+          <ProjectIdentity name="Anchor" detail="Local-first planner" />
+          <h2>Your plan stays on your device.</h2>
+          <p className="project-deck">
+            Tasks, routines, goals, and expenses remain useful offline, without an account, a server, or a data hand-off.
+          </p>
+        </motion.header>
 
-      <motion.div
-        className="anchor-product"
-        initial={{ opacity: 0, y: 50, rotate: -2 }}
-        whileInView={{ opacity: 1, y: 0, rotate: -1 }}
-        viewport={{ amount: 0.35 }}
-        transition={{ duration: 0.7, ease: [0.22, 0.78, 0.24, 1] }}
-      >
-        <div className="anchor-phone">
-          <span aria-hidden="true" />
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={view.id}
-              src={view.src}
-              alt={`Anchor ${view.label} screen`}
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -24 }}
-              transition={{ duration: 0.3 }}
-            />
-          </AnimatePresence>
+        <div className="project-camera anchor-camera">
+          <span className="anchor-camera__cradle" aria-hidden="true" />
+          <div className="anchor-product">
+            <div className="anchor-phone">
+              <span aria-hidden="true" />
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={view.id}
+                  src={view.src}
+                  alt={`Anchor ${view.label} screen`}
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -24 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </AnimatePresence>
+            </div>
+            <div className="anchor-tabs" aria-label="Anchor screens">
+              {views.map((item, index) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  onClick={() => setActiveView(index)}
+                  aria-pressed={index === activeView}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="anchor-tabs" aria-label="Anchor screens">
-          {views.map((item, index) => (
-            <button
-              type="button"
-              key={item.id}
-              onClick={() => setActiveView(index)}
-              aria-pressed={index === activeView}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </motion.div>
-
+      </div>
     </motion.section>
   );
 }

@@ -4,14 +4,13 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
-  type MotionValue,
 } from 'motion/react';
 import { TechGlyph, type TechItem } from '../components/TechSignature';
 
 const coreTools = [
   { id: 'react', label: 'React' },
-  { id: 'angular', label: 'Angular' },
   { id: 'typescript', label: 'TypeScript' },
+  { id: 'angular', label: 'Angular' },
 ] as const satisfies readonly TechItem[];
 
 const productTools = [
@@ -37,135 +36,162 @@ const deliveryTools = [
   { id: 'ci-cd', label: 'CI/CD' },
 ] as const satisfies readonly TechItem[];
 
-type ToolNameProps = {
+type SatelliteProps = {
   item: TechItem;
-  index: number;
-  progress: MotionValue<number>;
-  reduceMotion: boolean;
 };
 
-function ToolName({ item, index, progress, reduceMotion }: ToolNameProps) {
-  const revealStart = 0.1 + index * 0.038;
-  const revealEnd = Math.min(revealStart + 0.24, 0.96);
-  const opacity = useTransform(
-    progress,
-    [revealStart, revealEnd],
-    reduceMotion ? [1, 1] : [0, 1],
-  );
-  const y = useTransform(
-    progress,
-    [revealStart, revealEnd],
-    reduceMotion ? [0, 0] : [24, 0],
-  );
-  const scale = useTransform(
-    progress,
-    [revealStart, revealEnd],
-    reduceMotion ? [1, 1] : [0.97, 1],
-  );
+type StackClusterProps = {
+  index: string;
+  label: string;
+  items: readonly TechItem[];
+  position: 'product' | 'architecture' | 'delivery';
+};
 
+function Satellite({ item }: SatelliteProps) {
   return (
-    <motion.span
-      className="stack-tool"
-      style={{
-        opacity,
-        y,
-        scale,
-      }}
+    <span
+      className="stack-satellite"
+      role="img"
+      aria-label={item.label}
+      title={item.label}
     >
-      <i
-        aria-hidden="true"
-        style={{ animationDelay: `${index * -420}ms` }}
-      >
+      <i aria-hidden="true">
         <TechGlyph id={item.id} />
       </i>
-      <strong>{item.label}</strong>
-    </motion.span>
+      <strong aria-hidden="true">{item.label}</strong>
+    </span>
+  );
+}
+
+function StackCluster({
+  index,
+  label,
+  items,
+  position,
+}: StackClusterProps) {
+  return (
+    <section className={`stack-cluster stack-cluster--${position}`} aria-label={label}>
+      <header>
+        <span>{index}</span>
+        <h3>{label}</h3>
+      </header>
+      <div className="stack-cluster__tools">
+        {items.map((item) => (
+          <Satellite item={item} key={item.id} />
+        ))}
+      </div>
+    </section>
   );
 }
 
 export function StackScene() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion() ?? false;
+  const stackRef = useRef<HTMLElement>(null);
+  const reduceMotion = Boolean(useReducedMotion());
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'center center'],
+    target: stackRef,
+    offset: ['start 96%', 'start 0%'],
   });
-  const progress = scrollYProgress;
-  const contextOpacity = useTransform(
-    progress,
-    [0.02, 0.2],
-    reduceMotion ? [1, 1] : [0, 1],
+  const introX = useTransform(
+    scrollYProgress,
+    [0, 0.44, 1],
+    reduceMotion ? [0, 0, 0] : [-48, -12, 0],
   );
-  const contextY = useTransform(
-    progress,
-    [0.02, 0.2],
-    reduceMotion ? [0, 0] : [24, 0],
+  const introY = useTransform(
+    scrollYProgress,
+    [0, 0.44, 1],
+    reduceMotion ? [0, 0, 0] : [30, 8, 0],
+  );
+  const introOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.44, 1],
+    reduceMotion ? [1, 1, 1] : [0.3, 0.82, 1],
+  );
+  const topologyY = useTransform(
+    scrollYProgress,
+    [0, 0.48, 1],
+    reduceMotion ? [0, 0, 0] : [72, 20, 0],
+  );
+  const topologyRotateX = useTransform(
+    scrollYProgress,
+    [0, 0.48, 1],
+    reduceMotion ? [0, 0, 0] : [2.4, 0.45, 0],
+  );
+  const topologyScale = useTransform(
+    scrollYProgress,
+    [0, 0.48, 1],
+    reduceMotion ? [1, 1, 1] : [0.96, 0.988, 1],
+  );
+  const topologyOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.42, 1],
+    reduceMotion ? [1, 1, 1] : [0.28, 0.84, 1],
   );
 
   return (
     <motion.section
-      ref={sectionRef}
+      ref={stackRef}
       id="stack"
       data-scene="stack"
       className="stage stack-stage"
-      initial={false}
       aria-labelledby="stack-title"
     >
-      <h2 id="stack-title" className="visually-hidden">Technologies used across the work</h2>
+      <div className="stack-stage__layout">
+        <motion.header
+          className="stack-stage__intro"
+          style={{ x: introX, y: introY, opacity: introOpacity }}
+        >
+          <p>Technology</p>
+          <h2 id="stack-title">TypeScript at the core.</h2>
+          <span>React and Angular product systems, carried through delivery.</span>
+        </motion.header>
 
-      <motion.p
-        className="stack-stage__context"
-        style={{ opacity: contextOpacity, y: contextY }}
-      >
-        Three foundations. Product systems, architecture, and delivery around them.
-      </motion.p>
+        <motion.div
+          className="stack-topology"
+          style={{
+            y: topologyY,
+            rotateX: topologyRotateX,
+            scale: topologyScale,
+            opacity: topologyOpacity,
+            transformPerspective: 1600,
+          }}
+        >
+          <span className="stack-topology__frame" aria-hidden="true" />
+          <span className="stack-topology__ring stack-topology__ring--outer" aria-hidden="true" />
+          <span className="stack-topology__ring stack-topology__ring--inner" aria-hidden="true" />
 
-      <div className="stack-stage__core">
-        {coreTools.map((item, index) => (
-          <ToolName
-            item={item}
-            index={index}
-            key={item.id}
-            progress={progress}
-            reduceMotion={reduceMotion}
-          />
-        ))}
-      </div>
+          <div className="stack-stage__core" aria-label="Core technologies">
+            {coreTools.map((item) => (
+              <div
+                className={`stack-core-node stack-core-node--${item.id}`}
+                key={item.id}
+              >
+                <i aria-hidden="true"><TechGlyph id={item.id} /></i>
+                <strong>{item.label}</strong>
+              </div>
+            ))}
+          </div>
 
-      <div className="stack-stage__supporting">
-        <div className="stack-stage__row stack-stage__row--product">
-          {productTools.map((item, index) => (
-            <ToolName
-              item={item}
-              index={index + 3}
-              key={item.id}
-              progress={progress}
-              reduceMotion={reduceMotion}
+          <div className="stack-stage__clusters">
+            <StackCluster
+              index="A"
+              label="Product"
+              items={productTools}
+              position="product"
             />
-          ))}
-        </div>
-        <div className="stack-stage__row stack-stage__row--application">
-          {applicationTools.map((item, index) => (
-            <ToolName
-              item={item}
-              index={index + 7}
-              key={item.id}
-              progress={progress}
-              reduceMotion={reduceMotion}
+            <StackCluster
+              index="B"
+              label="Architecture"
+              items={applicationTools}
+              position="architecture"
             />
-          ))}
-        </div>
-        <div className="stack-stage__row stack-stage__row--delivery">
-          {deliveryTools.map((item, index) => (
-            <ToolName
-              item={item}
-              index={index + 12}
-              key={item.id}
-              progress={progress}
-              reduceMotion={reduceMotion}
+            <StackCluster
+              index="C"
+              label="Delivery"
+              items={deliveryTools}
+              position="delivery"
             />
-          ))}
-        </div>
+          </div>
+        </motion.div>
       </div>
     </motion.section>
   );

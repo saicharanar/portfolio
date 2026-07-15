@@ -73,7 +73,7 @@ export function PortfolioReel({
 
   return (
     <div className="portfolio-experience">
-      <OpeningArtifact onOpenPalette={onOpenPalette} />
+      <OpeningArtifact />
       <section className="work-group work-group--professional" aria-label="Professional work">
         <WorkChapter
           id="professional"
@@ -85,7 +85,7 @@ export function PortfolioReel({
             { href: '#thoughtworks', name: 'ThoughtWorks', detail: 'Device management, 2021 to 2025' },
           ]}
         />
-        <ProjectStack>
+        <ProjectStack startIndex={0}>
           <ModMedScene />
           <ThoughtWorksScene />
         </ProjectStack>
@@ -104,7 +104,7 @@ export function PortfolioReel({
             { href: '#glide', name: 'Glide', detail: 'TypeScript CLI' },
           ]}
         />
-        <ProjectStack>
+        <ProjectStack startIndex={2}>
           <ActionKitScene onOpenPalette={onOpenPalette} />
           <AnchorScene />
           <RelayScene />

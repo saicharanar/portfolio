@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { CommandPalette } from '../components/CommandPalette';
 import { Navigation } from '../components/Navigation';
+import { SystemChrome } from '../components/SystemChrome';
 import { PortfolioReel } from '../reel/PortfolioReel';
 import { sceneById } from './portfolio-content';
 import type { SceneId } from './portfolio-content';
@@ -33,6 +34,7 @@ export function App() {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to the work</a>
+      <SystemChrome />
       <Navigation
         ref={paletteTriggerRef}
         activeScene={activeScene}

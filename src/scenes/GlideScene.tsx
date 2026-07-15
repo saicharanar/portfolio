@@ -30,64 +30,66 @@ export function GlideScene() {
     <motion.section
       id="glide"
       data-scene="glide"
-      className="stage project-stage glide-stage stage--light"
-      initial={false}
+      className="stage project-stage glide-stage"
     >
-      <motion.header
-        className="project-copy glide-copy"
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ amount: 0.45 }}
-        transition={{ duration: 0.62 }}
-      >
-        <ProjectIdentity name="Glide" detail="TypeScript recording CLI" />
-        <h2>Record the route, not the cursor.</h2>
-        <p className="project-deck">
-          Glide drives Chromium through a product, waits for interface states to settle, and leaves a clean WebM walkthrough behind.
-        </p>
-      </motion.header>
+      <div className="project-scene__layout glide-layout">
+        <motion.header
+          className="project-copy glide-copy"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.45 }}
+          transition={{ duration: 0.62 }}
+        >
+          <ProjectIdentity name="Glide" detail="TypeScript recording CLI" />
+          <h2>Record the route, not the cursor.</h2>
+          <p className="project-deck">
+            Glide drives Chromium through a product, waits for interface states to settle, and leaves a clean WebM walkthrough behind.
+          </p>
+        </motion.header>
 
-      <motion.div
-        className="glide-product"
-        data-state={state}
-        initial={{ opacity: 0, scale: 0.96 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ amount: 0.3 }}
-        transition={{ duration: 0.65 }}
-      >
-        <header>
-          <span aria-hidden="true"><i /><i /><i /></span>
-          <strong>glide record</strong>
-          <button
-            type="button"
-            onClick={startRecording}
-            disabled={state === 'opening' || state === 'recording'}
+        <div className="project-camera glide-camera">
+          <motion.div
+            className="glide-product"
+            data-state={state}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ amount: 0.3 }}
+            transition={{ duration: 0.68, ease: [0.16, 1, 0.3, 1] }}
           >
-            {state === 'idle' ? 'Record' : state === 'saved' ? 'Again' : 'Recording'}
-          </button>
-        </header>
-        <div className="glide-product__terminal">
-          <code><span>$</span> glide record ./portfolio</code>
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={state}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              aria-live="polite"
-            >
-              {recordingCopy[state].status}
-            </motion.p>
-          </AnimatePresence>
-          <div className="glide-progress" aria-hidden="true"><span /></div>
+            <header>
+              <span aria-hidden="true"><i /><i /><i /></span>
+              <strong>glide record</strong>
+              <button
+                type="button"
+                onClick={startRecording}
+                disabled={state === 'opening' || state === 'recording'}
+              >
+                {state === 'idle' ? 'Record' : state === 'saved' ? 'Again' : 'Recording'}
+              </button>
+            </header>
+            <div className="glide-product__terminal">
+              <code><span>$</span> glide record ./portfolio</code>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={state}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
+                  aria-live="polite"
+                >
+                  {recordingCopy[state].status}
+                </motion.p>
+              </AnimatePresence>
+              <div className="glide-progress" aria-hidden="true"><span /></div>
+            </div>
+            <footer>
+              <span><i aria-hidden="true" /> WebM walkthrough</span>
+              <strong>{recordingCopy[state].time}</strong>
+            </footer>
+          </motion.div>
         </div>
-        <footer>
-          <span><i aria-hidden="true" /> WebM walkthrough</span>
-          <strong>{recordingCopy[state].time}</strong>
-        </footer>
-      </motion.div>
-
+      </div>
     </motion.section>
   );
 }

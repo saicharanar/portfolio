@@ -6,8 +6,10 @@ type ProjectIdentityProps = {
 export function ProjectIdentity({ name, detail }: ProjectIdentityProps) {
   return (
     <div className="project-identity">
-      <strong>{name}</strong>
-      <span>{detail}</span>
+      <span className="project-identity__copy">
+        <strong>{name}</strong>
+        <small>{detail}</small>
+      </span>
     </div>
   );
 }
